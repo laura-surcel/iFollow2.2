@@ -173,6 +173,7 @@
     <Compile Include="Controllers\FollowersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\WallController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -217,6 +218,7 @@
     <Compile Include="Models\rating.cs">
       <DependentUpon>Dal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\UploadFileModel.cs" />
     <Compile Include="Models\user.cs">
       <DependentUpon>Dal.tt</DependentUpon>

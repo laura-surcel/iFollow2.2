@@ -62,6 +62,22 @@ namespace Wad.iFollow.Web.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            SettingsModel sm = new SettingsModel();
+            user currentUser = Session["user"] as user;
+
+            using(var conn = new ifollowdatabaseEntities4())
+            {
+                currentUser = conn.users.First(u => u.id == currentUser.id);
+                if (currentUser != null)
+                {
+                    sm.firstName = currentUser.firstName;
+                    sm.lastName = currentUser.lastName;
+                    sm.country = currentUser.country;
+                    sm.city = currentUser.city;
+                    //sm.birthDate = (System.DateTime)currentUser.birthdate;
+                }
+            }
+
             return PartialView("_SettingsModal");
         }
 
