@@ -225,6 +225,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\datepicker.css" />
     <Content Include="Content\font-awseome\css\font-awesome.css" />
     <Content Include="Content\font-awseome\css\font-awesome.min.css" />
     <Content Include="Content\font-awseome\fonts\fontawesome-webfont.svg" />
@@ -304,6 +305,7 @@
     <Content Include="Images\profileIcon.jpg" />
     <Content Include="Images\settingsIcon.png" />
     <Content Include="Images\social-image2.jpg" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-modalmanager.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
