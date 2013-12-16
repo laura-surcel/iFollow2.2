@@ -8,28 +8,54 @@ using System.Diagnostics;
 
 namespace Wad.iFollow.Web.Models
 {
+    public class WallData
+    {
+        public string Path { get; set; }
+        public string Message { get; set; }
+        public string Author { get; set; }
+    }
+
     public class WallPostsModel
     {
-        public List<UploadFileModel> wallElements { get; set; }
+        public List<WallData> wallElements { get; set; }
+
+        public class PostsComparer: IComparer<post>
+        {
+            public int Compare(post p1, post p2)
+            {
+                int returnValue = 1;
+                returnValue = ((System.DateTime)p1.dateCreated).CompareTo((System.DateTime)p2.dateCreated);
+                return returnValue;
+            }
+        }
 
         public void BuildFromImagesAndPosts(ICollection<post> posts, ICollection<image> images)
         {
-            wallElements = new List<UploadFileModel>();
+            List<post> orderedList = posts.ToList();
+            orderedList.Sort(new PostsComparer());
+            wallElements = new List<WallData>();
 
-            for (int index = posts.Count() - 1; index >= 0 ; index--)
+            for (int index = orderedList.Count() - 1; index >= 0; index--)
             {
-                UploadFileModel newModel = new UploadFileModel();
-                newModel.Message = posts.ElementAt(index).message;
+                post currentPost = orderedList.ElementAt(index);
+                WallData newModel = new WallData();
+                newModel.Message = currentPost.message;
 
-                if (posts.ElementAt(index).imageId != null)
+                using(var conn = new ifollowdatabaseEntities4())
                 {
-                    string imagePath = images.First(i => i.id == posts.ElementAt(index).imageId).url;
+                    user author = conn.users.First(u => u.id == currentPost.ownerId);
+                    newModel.Author = author.firstName + " " + author.lastName;
+                }
+
+                if (orderedList.ElementAt(index).imageId != null)
+                {
+                    string imagePath = images.First(i => i.id == currentPost.imageId).url;
                     string path = @"~/Images/UserPhotos/" + imagePath;
                     newModel.Path = path;
                 }
                 else
                 {
-                    newModel.Path = "~/Images/1.jpg";
+                    newModel.Path = "";//"~/Images/1.jpg";
                 }
 
                 wallElements.Add(newModel);

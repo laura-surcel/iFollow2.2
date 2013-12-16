@@ -44,9 +44,20 @@
         @foreach(var item in @Model.elements.wallElements)
         {
             <div class="col-md-4"></div>
-            <div class="col-md-12"><img  style="width:500px; height:auto" src="@Url.Content(@item.Path)"/></div>
-            <div class="col-md-4"></div>
-            <p class="beautifulFont">@item.Message</p>
+            if (@item.Path == "")
+            {
+                <div class="col-md-12">
+                    <textarea readonly="readonly" style="text-align:left; background:border-box ; background-color:#eaeaea; color:firebrick; font-family:'Arabic Typesetting'; font-size: 30px; width:200px; height:auto">
+                        @item.Message
+                    </textarea>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-12"><img  style="width:500px; height:auto" src="@Url.Content(@item.Path)"/></div>
+                <div class="col-md-4"></div>
+                <p class="beautifulFont">@item.Message</p>
+            }            
 
             <div class="col-md-12" style="height:25px" ></div>
         }

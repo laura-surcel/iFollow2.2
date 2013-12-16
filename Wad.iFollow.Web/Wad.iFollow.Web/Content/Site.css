@@ -969,3 +969,9 @@ box-shadow: none;
     font-size:x-large;
 }
 
+.CommentBackground
+{
+	background-image: url('../images/placeholder.png');
+	height:200px;
+    width: 200px;
+}
